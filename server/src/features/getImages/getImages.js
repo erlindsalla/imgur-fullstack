@@ -27,19 +27,20 @@ exports.getImages = void 0;
 const request = __importStar(require("request"));
 const getImages = (req, res) => {
     const { showViral, section, sort, window, page } = req.body;
+    console.log(req.body);
     /*
-        section	:	hot | top | user. Defaults to hot
-        sort	:	viral | top | time | rising (only available with user section). Defaults to viral
-        page	:	integer - the data paging number
-        window	:	Change the date range of the request if the section is top. Accepted values are day | week | month | year | all. Defaults to day
-    */
-    const url = `https://api.imgur.com/3/gallery/${section || 'hot'}/${sort || 'viral'}/${window || 'day'}/${page || 1}?showViral=${!!showViral}&mature=false&album_previews=false`;
+          section	:	hot | top | user. Defaults to hot
+          sort	:	viral | top | time | rising (only available with user section). Defaults to viral
+          page	:	integer - the data paging number
+          window	:	Change the date range of the request if the section is top. Accepted values are day | week | month | year | all. Defaults to day
+      */
+    const url = `https://api.imgur.com/3/gallery/${section || "hot"}/${sort || "viral"}/${window || "day"}/${page || 1}?showViral=${!!showViral}&mature=false&album_previews=false`;
     const options = {
-        method: 'GET',
+        method: "GET",
         url,
         headers: {
-            "Authorization": `Client-ID ${process.env.client_id}`
-        }
+            Authorization: `Client-ID ${process.env.client_id}`,
+        },
     };
     request.get(options, (error, response, respBody) => {
         if (error)
@@ -50,14 +51,14 @@ const getImages = (req, res) => {
                 const data = [];
                 imageData.data.forEach((item) => {
                     const post = {
-                        title: item.title || '',
+                        title: item.title || "",
                         ups: item.ups || 0,
                         downs: item.downs || 0,
-                        score: item.score || 0
+                        score: item.score || 0,
                     };
                     if (item.images && item.images.length > 0) {
                         item.images.forEach((element) => {
-                            if (element.type.indexOf('image') === 0) {
+                            if (element.type.indexOf("image") === 0) {
                                 data.push(Object.assign(Object.assign({}, post), { link: element.link, description: element.description, height: element.height, width: element.width }));
                             }
                         });
