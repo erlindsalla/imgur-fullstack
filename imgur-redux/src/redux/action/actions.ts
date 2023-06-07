@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 
+import { fetchData } from "../../utils/axiosConfig";
 import {
   FilterActions,
   FETCH_DATA_REQUEST,
@@ -44,9 +45,7 @@ export const fetchDataAction = () => {
     try {
       dispatch({ type: FETCH_DATA_REQUEST });
 
-      const response = await axios.post("http://localhost:9000/gallery", {
-        ...filters,
-      });
+      const response = await fetchData(filters);
       console.log(response.data, "----->");
       dispatch({
         type: FETCH_DATA_SUCCESS,
