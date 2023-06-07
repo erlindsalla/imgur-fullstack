@@ -7,8 +7,8 @@ This project is a Node.js application with a React front-end and Redux for state
 
 ### Prerequisites
 
-- Node.js (version X.X.X)
-- npm (version X.X.X)
+- Node.js (version v18.10.0)
+- npm (version 9.6.7)
 
 ### Installation
 
