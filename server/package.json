@@ -6,7 +6,8 @@
   "scripts": {
     "start:DEV": "cross-env NODE_ENV=development && nodemon --ext ts --exec ts-node src/app.ts",
     "start": "npm run start:DEV",
-    "begin": "ts-node src/app.ts"
+    "begin": "ts-node src/app.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
